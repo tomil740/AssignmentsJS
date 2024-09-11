@@ -82,3 +82,81 @@ ratingsList.forEach((movieItemRating)=>{
     })
     console.log(sumRating/movieItemRating.length);
 })
+/* question2 define new data
+const movies = [
+    {name:"Movie 1", ratings:[5,6,7]},{name:"Movie 2", ratings:[8,9,9]}
+]
+*/
+const movies = [{ name: "Movie 1", ratings: [5, 6, 7]}, { name: "Movie 2", ratings:
+    [8, 9, 9]}, { name: "Movie 3", ratings: [6, 8,11, 8]}];
+//the function will get the movie name and returnted its average ratings
+function getMovieAverageRating(movieName){
+    let theResult = 0; 
+    for(let movie of movies){
+        if(movie.name === movieName){
+            for(let i of movie.ratings){
+                theResult+=i;
+            }
+            theResult/=movie.ratings.length;
+        }
+    }
+    return(theResult);
+}
+
+getMovieAverageRating("Movie 2");
+
+
+//the function get the higherst rated movie out of matched movies objects array
+function getTopRatedMovie(){
+    let maxRated = 0;
+    let resultObj = [];
+    for (let movie of movies){
+        const a = getMovieAverageRating(movie.name);
+        if(a > maxRated){
+            maxRated = a;
+            resultObj = movie;
+        }
+    }
+    console.log(resultObj);
+}
+
+getTopRatedMovie();
+
+//most rated movie
+function getMostRatedMovie(){
+    let maxRatings = 0;
+    let theResult = [];
+    for(let movie of movies){
+        if(movie.ratings.length > maxRatings){
+            maxRatings = movie.ratings.length;
+            theResult = movie;
+        }
+    }
+    return theResult;
+}
+const a = getMostRatedMovie();
+console.log(a);
+
+//removeLowestRateing,will take a spesfic object and rmeove its lowest rating
+function removeLowestRating(objNaem){
+    for(let movie of movies){
+        if(movie.name === objNaem){
+            console.log(movie.ratings.slice(0,2));
+            let minRate = 0;
+            for (let rating of movie.ratings){
+                if(minRate > rating)
+                    minRate = rating;
+            }
+            for (let index = 0; index < movie.ratings.length; index++){
+                if(movie.ratings[index] === minRate){
+                    if(index >= 0){
+                        movie.ratings.splice(1);
+                        console.log(movie.ratings.splice(1[1]));
+                    }
+                }
+            }
+        }
+    }
+}
+removeLowestRating("Movie 3");
+
