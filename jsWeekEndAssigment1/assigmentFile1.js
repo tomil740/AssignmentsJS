@@ -55,3 +55,108 @@ function toIntArray(binaryArray){
 }
 //toIntArray([0,1,0,0,1,0,1,0,1,1,1,0,1]);
 toIntArray([0,1,1,1]);
+
+/*
+findNextPerfect square:
+input: will be the suspisous current perfect square value(must be positive and integer...)
+return value will be the next perfect sequrare value to it 
+*/
+function getNextPerfectSquare(currentSquare){
+    //we will use the Math lib to squre root the values
+    let theRoot = Math.sqrt(currentSquare);
+    if(theRoot%1 != 0){
+        return -1;
+    }else{
+        theRoot+=1;
+        return Math.pow(theRoot,2);
+    }
+}
+
+console.log(`the next perfect square is ${getNextPerfectSquare(14*14)}`);
+
+/*
+findUniqueNumber
+input an array of minimum 3 charecters length, all numbers that include the same equal number through all beside 1 item
+return value the unique number...
+*/
+function getUniqueItem(ogArray){
+    let equalNum = ogArray[0];
+
+    //get equalNum
+    if(equalNum != ogArray[1]){
+        if(equalNum != ogArray[2]){
+            return equalNum;
+        }else{
+            return ogArray[1]
+        }
+    }
+
+    for(let item of ogArray){
+        if(item != equalNum)
+            return item;
+    }
+}
+console.log(getUniqueItem([1,21,21,21,21]))
+console.log(getUniqueItem([21,21,2,21,21]))
+
+/*
+getNumSummation
+input a integer positive value...
+output the matched integer summation
+*/
+function getNumSummation(theNum){
+    let summation = 0;
+
+    for(let i = theNum; i > 0; i--){
+        summation+=i;
+    }
+    return summation;
+}
+console.log(getNumSummation(8));
+
+/*
+getMatchedCentury
+input: will be a integer value represting a year
+retun: will be the matche century number to the input value...
+*/
+function getMatchedCentury(year){
+    let result = Math.round(year/100);
+    if(year%100 != 0)
+        result+=1;
+
+    return result;
+}
+console.log(`for the year 2011 the century is ${getMatchedCentury(2011)}`);
+console.log(`for the year 2000 the century is ${getMatchedCentury(2000)}`);
+console.log(`for the year 1900 the century is ${getMatchedCentury(1900)}`);
+console.log(`for the year 1900 the century is ${getMatchedCentury(1901)}`);
+
+/*
+basic math:
+input : action , value1 and value2
+return the matched outcome
+*/
+function basicMath(action,num1,num2){
+    let result;
+
+    switch(action){
+        case '+':
+            result = num1+num2;
+            break;
+
+        case '-':
+            result = num1-num2;
+            break;
+
+        case '/':
+            result = num1/num2;
+            break; 
+
+        case '*':
+            result = num1*num2;
+            break;           
+    }
+
+    return result;
+}
+console.log(basicMath('-',22,-77));
