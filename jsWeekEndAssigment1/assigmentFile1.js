@@ -1,3 +1,5 @@
+//const res = require("express/lib/response");
+
 /* exe1:
 will take a bollean value and reutrn matched string true/false
 */
@@ -245,3 +247,215 @@ function getNTribonacciLst(theSeeds,theLen){
 }
 console.log(getNTribonacciLst([1,1,1],9));
 console.log(getNTribonacciLst([0,1,1],9));
+
+/*
+triming exercise
+input= a string with minimum length of 2 
+return the matched string without the first and last charecters
+*/
+function trimEdges(theString){
+    return theString.slice(1,theString.length-1);
+}
+console.log(trimEdges("abc"));
+
+/*
+repeat str :
+input a string and matched number of repations
+return the matched string n times
+*/
+function repeatStr(str,n){
+    let theResult = "";
+    if(typeof(n)!= "number" || n <= 0 || typeof(str)!="string" || str === ""){
+        theResult = "the input value was invalid";
+    }else{
+        for(let i = 0; i < n; i++){
+            theResult+=str;
+        }
+    }
+
+    return theResult;
+}
+
+console.log(repeatStr("abc",10));
+
+/*
+toCamel cases:
+input a deshed/underlined seprated string...
+return the matched string in camel cases
+*/
+function getSeparatorIndex(str){
+    const a = str.indexOf("-");
+    const b = str.indexOf("_");
+
+    if(a === -1 || b === -1){
+        if(a === -1 && b === -1){
+            return -1
+        }else{
+            return (a===-1) ? b : a;
+        }
+    }else{
+        return (a>b) ? b : a;
+    }  
+}
+
+
+function toCamelCases(theString){
+    let result = "";
+    if(typeof(theString)!= "string" || theString.length < 1){
+        result =  "input string isnt valid";
+    }else{
+        let todoStr = theString; 
+        //init part
+
+        let firstWord = getSeparatorIndex(theString);
+        if(firstWord === -1){
+            result = theString;
+        }else{
+            result = theString.slice(0,firstWord)
+            todoStr = theString.slice(firstWord);
+        }
+        //loop through the string word by the sepration index and and apply the matched updates to it
+        while(todoStr.indexOf("-") != -1 || todoStr.indexOf("_") != -1){
+            const wordS = getSeparatorIndex(todoStr);
+            
+            todoStr = (todoStr.length != wordS+1)?
+                todoStr[wordS+1].toUpperCase() + todoStr.slice(wordS+2) : "";
+    
+    
+            const wordE = getSeparatorIndex(todoStr);
+            if(wordE != -1){
+                result+=todoStr.slice(0,wordE);
+                todoStr = todoStr.slice(wordE);
+            }else{
+                //if it isnt  found we finesh...
+                result+=todoStr;
+            }
+        }
+    }
+    return result;
+}
+
+console.log(toCamelCases("some-string-dsf"));
+console.log(toCamelCases("some-string-dsf-"));
+console.log(toCamelCases("some_string_dsf-"));
+console.log(toCamelCases("some_string_dsf-"));
+
+/*
+toWeirdCases:
+input=> a strings includes only icludes :
+* single spaces between words 
+* charceters!
+
+return value will be the matched string in weirdCases according to the defination
+*/
+
+function toWeirdCase(inputStr){
+    let result = "";
+    let todoStr = inputStr;
+
+    while(todoStr.indexOf(" ") != -1){
+        const wordEndIndex = todoStr.indexOf(" ");
+        const theWord = (todoStr.slice(0,wordEndIndex)).toLowerCase();
+        let newWord = "";
+        for(let index = 0; index < theWord.length; index++){
+            if(index%2 === 0){
+                newWord+=(theWord[index].toUpperCase());
+            }else{
+                newWord+=theWord[index];
+            }
+        }
+        result+=" " + newWord;
+        todoStr = todoStr.slice(wordEndIndex+1);
+    }
+    return result;
+}
+console.log(toWeirdCase("some word I try"));
+console.log(toWeirdCase("Weird string case"));
+
+/*
+toInitials:
+input => a string with two words with one space only between them (only chars...)
+return the first two charecters in uperCase with dots between them 
+*/
+function getInitials(theWords){
+    //get the words:
+    const theSpace = theWords.indexOf(" ");
+    const word1 = theWords.slice(0,theSpace);
+    const word2 = theWords.slice(theSpace+1);
+
+    return `${word1[0].toUpperCase()}.${word2[0].toUpperCase()}`;
+}
+console.log(getInitials("hello world"));
+
+/*
+maskify:
+input a string value (can be any string with no constraints)
+return vlaue matched string with # mask to all beside the last 4 charecters 
+*/
+function maskify(theStr){
+    let exposeSIndex = (theStr.length > 4) ? theStr.length-4 : 0;
+    let result = "";
+    for(let i = 0; i < exposeSIndex; i++){
+        result+="#";
+    }
+    result+=theStr.slice(exposeSIndex);   
+    return result;
+}
+console.log(maskify("12   "));
+console.log(maskify("4556364607935616"));
+
+/*
+shortest word:
+input: => a string of words(never empty alwase a string) 
+*asume assume they separated by ,*
+returns the shorteset word length
+*/
+function shortestWord(theWords){
+    let shortestWord = 100000000;
+    let todoWords = theWords;
+    while(todoWords.indexOf(",")!=-1){
+        const word = todoWords.slice(0,todoWords.indexOf(","));
+        todoWords = todoWords.slice(todoWords.indexOf(",")+1);
+        if(word.length < shortestWord)
+            shortestWord = word.length;
+    }
+
+    //in case of 1 word,the length is the all string
+    if(todoWords.length!=0){
+        if(todoWords.length < shortestWord)
+            shortestWord = todoWords.length;
+    }
+    return shortestWord;
+}
+const a =  shortestWord("some,dsfs,dsfsdf,nlk");
+const b =  shortestWord("a");
+const c =  shortestWord("abcd");
+console.log(`first ${a} second ${b} and last one ${c}`);
+
+/*
+longeset word:
+input: => a string of words(never empty alwase a string) 
+*asume assume they separated by ,*
+returns the longest word length
+*/
+function longeset(theWords){
+    let longeset = -1;
+    let todoWords = theWords;
+    while(todoWords.indexOf(",")!=-1){
+        const word = todoWords.slice(0,todoWords.indexOf(","));
+        todoWords = todoWords.slice(todoWords.indexOf(",")+1);
+        if(word.length > longeset)
+            longeset = word.length;
+    }
+
+    //in case of 1 word,the length is the all string
+    if(todoWords.length!=0){
+        if(todoWords.length > longeset)
+            longeset = todoWords.length;
+    }
+    return longeset;
+}
+const e =  longeset("some,dsfs,dsfsdf,nlk");
+const f =  longeset("a.dsgfdsfg,dsfsdf");
+const g =  longeset("abcdkmkl,dsgfsdfg");
+console.log(`first ${e} second ${f} and last one ${g}`);
