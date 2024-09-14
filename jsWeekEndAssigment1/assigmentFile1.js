@@ -459,3 +459,41 @@ const e =  longeset("some,dsfs,dsfsdf,nlk");
 const f =  longeset("a.dsgfdsfg,dsfsdf");
 const g =  longeset("abcdkmkl,dsgfsdfg");
 console.log(`first ${e} second ${f} and last one ${g}`);
+
+
+//file 2 Advanced Iteration Logic section:
+
+/*
+accum: 
+*/
+function accum(theStr){
+    let result = "";
+    //init
+    if(theStr.length != 0){
+        result+=theStr[0].toUpperCase();
+    }
+
+    for(let index = 1; index < theStr.length; index++){
+        if(index === 4 && theStr[index] === "z"){
+            //nothing
+        }else{
+            result+="-";
+            result+=theStr[index].toUpperCase();
+        }
+        for(let i = 0; i < index; i++){
+            result+=theStr[index].toLowerCase();
+        }
+    }
+
+    return result;
+}
+console.log(
+accum("abcd") );
+console.log(
+accum("RqaEzty")
+);
+console.log(
+accum("cwAt")
+);
+
+
