@@ -160,3 +160,54 @@ function basicMath(action,num1,num2){
     return result;
 }
 console.log(basicMath('-',22,-77));
+
+
+/*calculate population groth time
+params:
+p0:positivie int
+growPrecent = positive/null
+aug = Integer
+p = positive Integer
+*/
+function nb_year(p0,growPrecent,aug,p){
+    let currentP =p0;
+    let years = 0;
+
+    let theGrowPrecnt = (growPrecent!=null)?
+        (growPrecent/100):-1;
+    
+    while(currentP < p){
+        let newP = currentP;
+        if(theGrowPrecnt != -1){
+            newP += currentP*theGrowPrecnt
+        }
+        years++;
+        currentP = newP+aug;
+    }
+    return years;
+}
+console.log(nb_year(1500, 5, 100, 5000));
+console.log(nb_year(1500000, 2.5, 10000, 2000000));
+
+/*getRemaingPepole on the bus
+input : provided with matched array thats includes sub Int array with two values (amount of enter/exit from the bus)
+the function will calculate and return the remaning pepole on the bus at the last station
+*/
+
+function getRemainPeople(busStopsData){
+    let busSum = 0;
+
+    for(let stopData of busStopsData){
+        const toAdd = stopData[0]-stopData[1];
+        busSum+=toAdd;
+    }
+    return busSum;
+}
+
+console.log(
+    getRemainPeople(
+        [
+            [5,0],[10,4],[10,15],[6,2],[0,0],[18,7],[1,18]
+        ]
+    )
+);
