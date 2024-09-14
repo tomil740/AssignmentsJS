@@ -211,3 +211,37 @@ console.log(
         ]
     )
 );
+
+/*Tribonacci exercise:
+the function will get the tribonacci first 3 items and n(a int positive number)
+and will return n length of the matched tribonacci list
+*/
+function getNTribonacciLst(theSeeds,theLen){
+    let result = theSeeds;
+    if(theLen > 3){
+        //we will track 3 seeds and update them on every loop etration
+        while(result.length < theLen){
+            const newItem = result[result.length-1] + result[result.length-2] + result[result.length-3]
+            result.push(newItem);
+        }
+    }else{
+        switch(theLen){
+            case 0 :
+                result = [];
+                break;
+            case 1 :
+                result = theSeeds[0];
+                break;
+            case 2 :
+                result = theSeeds.slice(0,2);
+                break; 
+            case 3 :
+                result = theSeeds;
+                break;           
+
+        }
+    }
+    return result;
+}
+console.log(getNTribonacciLst([1,1,1],9));
+console.log(getNTribonacciLst([0,1,1],9));
