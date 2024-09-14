@@ -497,3 +497,67 @@ accum("cwAt")
 );
 
 
+/*
+counting duplicates:
+input: a string, will include only alpabets and numeric digits.
+return value will be :
+* total repeation of the matched elements
+* and some description of each...
+*/
+function CountPhraseDuplications(thePhrase){
+    const history = [];
+    const result = [];
+    let total = 0;
+    for(let itemToCheck = 0; itemToCheck < thePhrase.length; itemToCheck++){
+        //check if it in history...
+        let historyCheck = true;
+        for(let item of history){
+            if(item.toLowerCase() === thePhrase[itemToCheck].toLowerCase()){
+                historyCheck=false;
+            }
+        }
+        if(historyCheck){
+            history.push(thePhrase[itemToCheck].toLowerCase());
+            let counter = 0;
+            let counterC = 0;
+            for(let repationCheck = 0; repationCheck < thePhrase.length; repationCheck++){
+                if(thePhrase[itemToCheck].toLowerCase() === thePhrase[repationCheck].toLowerCase()){
+                    if(thePhrase[itemToCheck].toLowerCase() != thePhrase[repationCheck]){
+                        counterC++;
+                    }else{
+                        counter++;
+                    }
+                }
+            }
+            result.push([thePhrase[itemToCheck],counterC,counter]);
+        }
+    }
+    let resultSummary = "";
+    for(let item of result){
+        if(item[1]+item[2] != 1){
+            //item repation...
+            total++;
+            //the matched item amount
+            resultSummary+=` ${item[0].toLowerCase()} occurs ${item[1]+item[2]}`
+            if(item[1] != 0 && item[2] != 0){
+                resultSummary+=`(${item[0].toLowerCase()} occurs ${item[2]} times and 
+                ${item[0].toUpperCase()} occurs ${item[1]} times)`
+            }
+        }
+    }
+    if(resultSummary === ""){
+        resultSummary = "no characters repeats more than once";
+    }
+    return (`${total}# ${resultSummary}`);
+}
+
+console.log(CountPhraseDuplications("Indivisibilities"));
+console.log(CountPhraseDuplications("aabBcde"));
+console.log(CountPhraseDuplications("abcde"));
+console.log(CountPhraseDuplications("aA11"));
+
+//to lower/upper case on numbers dosnt effect them and return valid answer...
+
+ 
+
+
