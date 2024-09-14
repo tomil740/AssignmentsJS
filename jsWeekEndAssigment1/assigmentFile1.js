@@ -558,6 +558,70 @@ console.log(CountPhraseDuplications("aA11"));
 
 //to lower/upper case on numbers dosnt effect them and return valid answer...
 
+//6.3 organize strings
+function organizeStrings(str1,str2){
+
+    //convert each char into matched decimal value array(with all of the strings charecters)
+    const theValues = [];
+    for(let theChar of str1){
+        theValues.push([theChar,theChar.charCodeAt()]);
+    }
+    for(let theChar of str2){
+        theValues.push([theChar,theChar.charCodeAt()]);
+    }
+
+
+    //order the array by number from the smallest
+
+    //the variable will be updated through all the chrecters until it will be sorted according to the hex value
+    let valuesToOrder = theValues;
+    let result = [];
+    while(valuesToOrder.length > 1){
+        //take randomly the first item in the update array every loop
+        let minItem = valuesToOrder[0];
+        for(let item of valuesToOrder){
+            //skip the first item we initalize,in order to clean the duplications
+            if(item != valuesToOrder[0]){
+                //sort the smallest number in the array
+                if(item[1] < minItem[1]){
+                    minItem = item;
+                }
+                //delete duplications from our result array
+                if(item[1] === minItem[1]){
+                    valuesToOrder = removeItem(valuesToOrder,item);
+                    if(valuesToOrder.length < 1){
+                        break;
+                    }
+                }
+            }
+        }
+        //remove the sorted minimum value item from the full array 
+        valuesToOrder = removeItem(valuesToOrder,minItem);
+        //add the sorted item to the result array
+        result.push(minItem);
+    }
+
+
+    //convert the result array items to the matched string
+    let outcome = [];
+    for(let item of result){
+        outcome.push(item[0]);
+    }
+    return outcome.join("");
+}
+console.log(organizeStrings("xyaabbbccccdefww","xxxxyyyyabklmopq"));
+
+//helper function to remove an item from the array
+function removeItem(valuesToOrder,toRemoveItem){
+    //remove the item
+    let newValuesArray =[];
+    for(let theItem of valuesToOrder){
+        if(theItem != toRemoveItem){
+            newValuesArray.push(theItem);
+        }
+    }
+    return newValuesArray;
+}
  
 
 
