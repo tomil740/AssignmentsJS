@@ -627,4 +627,35 @@ function removeItem(valuesToOrder,toRemoveItem){
 }
  
 
+/*
+exercise 6.4 isogram:
+input : a stirng that includes only letters...
+return value : a boolean value represent is the input string isogram
+*/
+console.log("exercise 6.4 isogram");
+
+function isogram(inputStr){
+    let result = true;
+
+    if(inputStr.length > 1){
+        let theStr = inputStr.toLowerCase();
+        let itemToCompare = theStr[0];
+        theStr = theStr.slice(1);
+        while(theStr.length > 1){
+            for(let char of theStr){
+                if(itemToCompare === char){
+                    result = false;
+                    break;
+                }
+            }
+            itemToCompare = theStr[0];
+            theStr = theStr.slice(1);
+        }
+    }
+    return result;
+}
+console.log(isogram("AbBc"));
+console.log(isogram("Abc"));
+
+
 
