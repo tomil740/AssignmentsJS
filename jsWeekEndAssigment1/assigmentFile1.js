@@ -609,7 +609,10 @@ function organizeStrings(str1,str2){
     }
     return outcome.join("");
 }
+
 console.log(organizeStrings("xyaabbbccccdefww","xxxxyyyyabklmopq"));
+console.log(organizeStrings("abcdefghijklimnopqrstuvwxyz","abcdefghijklimnopqrstuvwxyz"));
+
 
 //helper function to remove an item from the array
 function removeItem(valuesToOrder,toRemoveItem){
