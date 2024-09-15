@@ -739,3 +739,23 @@ function filter(theCollection, callBackFun){
 
 //shoud return oinly the isogram items in the new array
 console.log(filter(testArray,isogram));
+
+/*
+exercise 8 : get rectangle perimeter
+input : length and width
+return value will be the matched rec perimeter to the input values
+*/
+function findPerimeter(length,width){
+    let result = -1;
+    //check the input values for valdition(must be number and positive)
+    if(typeof(length) === "number" && typeof(width) === "number" && length > 0 && width > 0){
+        result = (2*width)+(2*length);
+    }else{
+        console.log("input values isnt valid")
+    }
+    return result;
+}
+//basic test
+console.log(findPerimeter(6,7));//should be 26
+console.log(findPerimeter(20,10));//should be 60
+console.log(findPerimeter(2,9));//should be 22
