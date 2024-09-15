@@ -652,10 +652,90 @@ function isogram(inputStr){
             theStr = theStr.slice(1);
         }
     }
+    console.log(result);
     return result;
 }
 console.log(isogram("AbBc"));
 console.log(isogram("Abc"));
 
+/*
+exercise 7,clone js default functions:
+*/
+console.log("exercise 7,clone js default functions:");
+console.log("for each function");
+/*
+for each:
+input : collection [string/array] and callBackFun
+the function will apply the callback on each item of the match collection
+*/
+function forEach(theCollection, callBackFun){
+    //colection valdition check
+    if(typeof(theCollection) === "string" || Array.isArray(theCollection)){
+        for(let item of theCollection){
+            callBackFun(item);
+        }
+    }else{
+        console.log("input collection is not valid...")
+    }
+}
+//basic test
+const testArray = ["abcgf","bvikkd","dsfdsf"];
+//shoud print the result for each item
+forEach(testArray,isogram);
+//for not valid input
+forEach(124,isogram);
+
+/*
+map function:
+input a collection and matched callback method
+return value : a new array with the callback function apply on each item of the original collection
+*/
+function map(theCollection, callBackFun){
+    let newCollection = theCollection;
+    //colection valdition check
+    if(typeof(theCollection) === "string" || Array.isArray(theCollection)){
+        newCollection = [];
+        for(let item of theCollection){
+            newCollection.push(callBackFun(item));
+        }
+        //check if its a string and should join back...
+        if(typeof(theCollection) === "string"){
+            newCollection = newCollection.join("");
+        }
+    }else{
+        console.log("input collection is not valid...")
+    }
+    return newCollection;
+}
+//basic test
+//shoud return the result for each item
+console.log(`the map function,retun value ${map(testArray,isogram)}`);
 
 
+/*
+filter function 
+input: matched collection and valdition function to each item
+return value : will be matched copy of our input collection with the item thats pass the valdition function
+*/
+function filter(theCollection, callBackFun){
+    let newCollection = theCollection;
+    //colection valdition check
+    if(typeof(theCollection) === "string" || Array.isArray(theCollection)){
+        newCollection = [];
+        for(let item of theCollection){
+            if(callBackFun(item)){
+                newCollection.push(item);
+            }
+        }
+        //check if its a string and should join back...
+        if(typeof(theCollection) === "string"){
+            newCollection = newCollection.join("");
+        }
+    }else{
+        console.log("input collection is not valid...")
+    }
+    return newCollection;
+}
+
+//shoud return oinly the isogram items in the new array
+console.log(filter(testArray,isogram));
