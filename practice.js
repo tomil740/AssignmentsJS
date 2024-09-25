@@ -1,13 +1,16 @@
-let age;
-let height;
-let sonOfManger;
+class Human{
+    constructor(name){
+        this.name = name;
+    }
+}
 
-if(age > 15 || sonOfManger){
-    if(height < 110)
-        console.log("go on kids ride");
-    else if(height > 110)
-        console.log("go on rollercoster");
+class Kid extends Human{
+    constructor(name,kidniGarden){
+        super(name);
+        this.kidniGarden = kidniGarden;
+    }
 }
-else if(age < 15){
-    console.log("Can't enter");
-}
+
+const kidObj = new Kid("levi","someKidniGarden");
+console.log(kidObj.name);
+console.log(kidObj.kidniGarden);
